@@ -56,11 +56,11 @@ export default function TextExperience() {
                 height={4}
                 curveSegments={10}
                 bevelThickness={10}
-                bevelSize={2}
+                bevelSize={4}
                 bevelOffset={0}
                 bevelSegments={5}
               >
-                Hi! Im Jhon Doe
+                Exo 
                 <MeshTransmissionMaterial
                   clearcoat={1}
                   samples={3}
@@ -84,11 +84,11 @@ export default function TextExperience() {
                 height={4}
                 curveSegments={10}
                 bevelThickness={10}
-                bevelSize={2}
+                bevelSize={4}
                 bevelOffset={0}
                 bevelSegments={5}
               >
-                Web Developer
+                Games
                 <MeshTransmissionMaterial
                   clearcoat={1}
                   samples={3}

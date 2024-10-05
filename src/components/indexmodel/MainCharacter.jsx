@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei';
 import { AnimationMixer, LoopRepeat } from 'three';
 
 export default function MainCharacter() {
-  const { scene, animations } = useGLTF('../models/dog.glb');
+  const { scene, animations } = useGLTF('../models/maid_rocky.glb');
   const { viewport } = useThree(); 
   const mixer = useRef(null);
   const modelRef = useRef();
@@ -49,7 +49,7 @@ export default function MainCharacter() {
 
   return (
     <group scale={responsiveScale}>
-      <primitive position={[0, 0, 0]} scale={2.2} ref={modelRef} object={scene} />
+      <primitive position={[0, 1, 0]} scale={0.4} ref={modelRef} object={scene} />
     </group>
   );
 }
