@@ -1,22 +1,16 @@
 ---
 import Icon from './Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
 import type { iconPaths } from './IconPaths';
 import LaptopModel from './Laptop/LaptopModel.jsx'
 
-/** Main menu items */
 const textLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
   { label: 'Home', href: '/', icon: 'house' },
   { label: 'Work', href: '/work/', icon: 'briefcase' },
   { label: 'About', href: '/about/', icon: 'user' },
 ];
 
-/** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-  { label: 'Twitter', href: 'https://twitter.com/me', icon: 'twitter-logo' },
-  { label: 'Twitch', href: 'https://twitch.tv/me', icon: 'twitch-logo' },
-  { label: 'GitHub', href: 'https://github.com/me', icon: 'github-logo' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
+  { label: 'Nasa', href: 'https://science.nasa.gov', icon: 'nasa'}
 ];
 
 
@@ -28,7 +22,7 @@ const iconSize = '2.5em';
       <div class="laptopModel">
         <LaptopModel client:load />
       </div>
-      John Doe
+      La Banda de Marshall
     </a>
     <menu-button>
       <template>
@@ -56,9 +50,7 @@ const iconSize = '2.5em';
                 },
               ]}
             >
-              <!-- Ícono del menú -->
               <Icon icon={icon} class="menu-icon" size={iconSize} />
-              <!-- Overlay con el label que aparece al hacer hover -->
               <span class="menu-overlay">{label}</span>
             </a>
           </li>
@@ -97,9 +89,7 @@ const iconSize = '2.5em';
                 },
               ]}
             >
-              <!-- Ícono del menú -->
               <Icon icon={icon} class="menu-icon" size={iconSize} />
-              <!-- Overlay con el label que aparece al hacer hover -->
               <span class="menu-overlay">{label}</span>
             </a>
           </li>
@@ -116,10 +106,6 @@ const iconSize = '2.5em';
             </a>
           ))
         }
-      </div>
-
-      <div class="theme-toggle">
-        <ThemeToggle />
       </div>
     </div>
   </div>

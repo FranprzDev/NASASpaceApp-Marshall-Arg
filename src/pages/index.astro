@@ -6,16 +6,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Component Imports
 import CallToAction from "../components/CallToAction.astro";
-import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-import GridComponent from '../components/dragable/GridComponent.jsx';
 
 // Page section components
-import ContactCTA from "../components/ContactCTA.astro";
-import Skills from "../components/Skills.astro";
+import Game from "../components/Game.astro";
 import MainModel from "../components/indexmodel/MainModel";
 import TextModel from "../components/indexText/TextModel";
 
@@ -36,13 +30,6 @@ const projects = (await getCollection("work"))
           <div class="modelText">
             <TextModel client:load />
           </div>
-        
-          
-          <div class="roles" slot="pills">
-            <Pill><Icon icon="cube3D" size="1.33em" /> 3D artist</Pill>
-            <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Designer</Pill>
-          </div>
         </Hero>
 
         <div class="model">
@@ -50,54 +37,22 @@ const projects = (await getCollection("work"))
         </div>
       </header>
 
-      <Skills />
+      <Game />
     </div>
 
     <main class="wrapper stack gap-20 lg:gap-48">
       <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Selected Work</h3>
+          <h3>About Us</h3>
           <p>
-            Take a look below at some of my featured work for clients from the
-            past few years.
+            We are the team of people who make awesome things happen.
           </p>
+
+          <CallToAction href="/about" set:text={"More about we"}/>
+
+
         </header>
-
-        <div class="gallery">
-          <Grid variant="offset">
-            {
-              projects.map((project) => (
-                <li>
-                  <PortfolioPreview project={project} />
-                </li>
-              ))
-            }
-          </Grid>
-        </div>
-
-        <div class="cta">
-          <CallToAction href="/work/">
-            View All
-            <Icon icon="arrow-right" size="1.2em" />
-          </CallToAction>
-        </div>
-      </section>
-
-      <section class="section with-background bg-variant">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>My Tech Essentials</h3>
-          <p>
-            Explore the core tools and technologies that power my projects. Drag and drop the essential building blocks of my creative process.
-          </p>
-        </header>
-
-        <div class="gallery">
-          <GridComponent client:only="react" />
-        </div>
-      </section>
     </main>
-
-    <ContactCTA />
   </div>
 </BaseLayout>
 
