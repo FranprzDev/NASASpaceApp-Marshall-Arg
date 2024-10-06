@@ -3,16 +3,13 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { AnimationMixer, LoopRepeat } from 'three';
 
-export default function MainCharacter() {
-  const { scene, animations } = useGLTF('../models/marshall_paw_patrol_free.glb');
+export default function PawPatrolCharacterRocky() {
+  const { scene, animations } = useGLTF(`../models/rocky.glb`);
   const { viewport } = useThree(); 
   const mixer = useRef(null);
   const modelRef = useRef();
 
   useEffect(() => {
-    // Check Animations
-    // console.log('Model loaded:', scene);
-    // console.log('Animations:', animations);
 
     if (animations.length > 0) {
       mixer.current = new AnimationMixer(scene);
@@ -49,7 +46,7 @@ export default function MainCharacter() {
 
   return (
     <group scale={responsiveScale}>
-      <primitive position={[0, 1, 0]} scale={4.5} ref={modelRef} object={scene} />
+      <primitive position={[0, 5, 0]} scale={5} ref={modelRef} object={scene} />
     </group>
   );
 }

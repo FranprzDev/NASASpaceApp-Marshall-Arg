@@ -1,20 +1,20 @@
 ---
-import SuperIcon from "./SuperIcon";
+import PawPatrolModel from "./pawpatrolmodel/PawPatrolModel";
 ---
 
 <section class="box skills">
-  <div class="stack gap-2 lg:gap-4 skill-item">
-    <div class="superIcon">
-      <SuperIcon client:visible />
-    </div>
+  <div class="stack gap-2 lg:gap-4 redirect">
     <h2>Exploring Exo Planets</h2>
-    <p>Explore Exo Planets with Marshall</p>
-  </div>
-  <div class="stack gap-2 lg:gap-4 skill-item">
-    <div class="superIcon">
-      <SuperIcon client:visible />
+    <div class="">
+      <PawPatrolModel name="rocky" client:load />
     </div>
-    <h2>Disconvering Exo Planets</h2>
+    <p>Explore Exo Planets with Rocky</p>
+  </div>
+  <div class="stack gap-2 lg:gap-4 redirect">
+    <h2>Discovering Exo Planets</h2>
+    <div class="">
+      <PawPatrolModel name="everest" client:load />
+    </div>
     <p>Discover with Everest</p>
   </div>
 </section>
@@ -29,51 +29,16 @@ import SuperIcon from "./SuperIcon";
     perspective: 1000px;
   }
 
-  .skill-item {
-    background-color: var(--gray-900);
-    padding: 2rem;
-    border-radius: 0.75rem;
-    transition: transform 0.5s ease;
-    transform-style: preserve-3d;
-    transform-origin: center;
+  .redirect {
     cursor: pointer;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
   }
-
-  .skill-item:hover {
-    transform: rotateY(180deg);
-  }
-
-  .skill-item h2,
-  .skill-item p {
-    transition: opacity 0.3s ease;
-  }
-
   .superIcon {
     height: 60px;
     width: 60px;
-  }
-
-  .skill-item:hover h2,
-  .skill-item:hover p {
-    opacity: 0;
-  }
-
-  .skill-item {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .skill-item:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .skill-item:hover::after {
-    content: "John Doe -  SKILLS";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateY(180deg);
-    font-size: 1.2rem;
-    color: var(--accent-regular);
   }
 
   .skills {

@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
-import MainExperience from './MainExperience';
+import PawPatrolExperience from './PawPatrolExperience';
 
-export default function MainModel() {
+export default function PawPatrolModel({ name }) {
   return (
     <Canvas 
       camera={{
@@ -11,7 +11,7 @@ export default function MainModel() {
         position: [0, -1, 5] 
       }}
     >
-      <MainExperience />
+      <PawPatrolExperience name={name} />
     </Canvas>
   );
 }
