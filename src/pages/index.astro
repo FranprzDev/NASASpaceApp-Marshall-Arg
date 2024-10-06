@@ -6,6 +6,10 @@ import Game from "../components/Game.astro";
 <BaseLayout>
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
+      <section>
+        <h1 style="text-align: center;" class="degrade">Welcome Space Explorers</h1>
+        <h5 style="text-align: center;" class="degrade">Are you ready to learn and have fun at the same time? </h5>
+      </section>
       <Game />
     </div>
   </div>
@@ -17,6 +21,12 @@ import Game from "../components/Game.astro";
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+  }
+
+  .degrade {
+    background-image: linear-gradient(90deg, #f4f4f4 3%, #5492be 62%, #366787 69%, #184d73 97%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .model {

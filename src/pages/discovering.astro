@@ -7,6 +7,7 @@ interface Game {
   image: string;
   demo?: string;
   description: string;
+  modalDescription?: any;
 }
 
 const games: Game[] = [
@@ -19,15 +20,21 @@ const games: Game[] = [
   },
   {
     name: "Spectral Match",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/games/Spectral-Match/Spectral-Match-Portada.png",
     description:
       "Match planets to elements by analyzing their light spectrum in this interactive puzzle.",
+    modalDescription: {
+      largeDescription: "This interactive puzzle adapts the transit spectroscopy technique. Children have to match colorful planets to elements from the periodic table by analyzing the light spectrum each planet emits and identifying which colors are missing. Each missing color corresponds to a specific element that the planet’s atmosphere has absorbed—like oxygen, hydrogen, or helium.",
+      gameExample: "/assets/games/Spectral-Match/Spectral-Match-Example.png",
+      gameWin: "/assets/games/Spectral-Match/Spectral-Match-Win.png",
+    }
   },
   {
     name: "Balancing Planets",
     image: "/assets/games/Balancing-Planet/Balancing-Portada.png",
     description:
       "Determine exoplanet masses using a planet-sized balance scale. How many Earths does it take?",
+    demo: "/assets/games/Balancing-Planet/Demo.mp4",
   },
 ];
 ---
@@ -66,12 +73,11 @@ const games: Game[] = [
             (button as HTMLElement).dataset.game || "{}"
           );
           modalContent.innerHTML = `
-          <h2>${gameData.name}</h2>
-          <p>${gameData.description}</p>
-          <div>
-            ${gameData.demo ? `<video src="${gameData.demo}" alt="${gameData.name}" class="modal-video" controls></video>` : ""}
-          </div>
-        `;
+          <h2 style="text-align: center;">${gameData.name}</h2>
+          ${gameData.name === "Find-An-Exo" ? `<video src="${gameData.demo}" alt="${gameData.name}" class="modal-video" width="100%" height="400px" controls></video>` : ""}
+          ${gameData.name === "Spectral Match" ? `<section style="display: flex; flex-direction: column; justify-content: center;"><p>${gameData.modalDescription.largeDescription}</p><h4>Example:</h4><img src="${gameData.modalDescription.gameExample}" alt="Example"><h4>Win</h4><img src="${gameData.modalDescription.gameWin}" alt="Win"></section>` : ""}
+          ${gameData.name === "Balancing Planets" ? `<video src="${gameData.demo}" alt="${gameData.name}" class="modal-video" width="100%" height="400px" controls></video>` : ""}
+          `;
           modal.style.display = "flex";
         });
       });
