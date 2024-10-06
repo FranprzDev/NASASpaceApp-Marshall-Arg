@@ -1,100 +1,193 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Modal from "../components/Modal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 interface Game {
   name: string;
   image: string;
+  demo?: string;
   description: string;
 }
 
 const games: Game[] = [
   {
     name: "Find-An-Exo",
-    image: "/placeholder.svg?height=200&width=300",
-    description: "Spot shadows in front of stars to find exoplanets using the Transit method.",
+    image: "/assets/games/Find-An-Exo/Find-An-Exo-Portada.png",
+    demo: "/assets/games/Find-An-Exo/Demo.mp4",
+    description:
+      "Spot shadows in front of stars to find exoplanets using the Transit method.",
   },
   {
     name: "Spectral Match",
     image: "/placeholder.svg?height=200&width=300",
-    description: "Match planets to elements by analyzing their light spectrum in this interactive puzzle.",
+    description:
+      "Match planets to elements by analyzing their light spectrum in this interactive puzzle.",
   },
   {
     name: "Balancing Planets",
-    image: "/placeholder.svg?height=200&width=300",
-    description: "Determine exoplanet masses using a planet-sized balance scale. How many Earths does it take?",
-  },
-  {
-    name: "Cosmic Crusade",
-    image: "/placeholder.svg?height=200&width=300",
-    description: "Épica batalla intergaláctica por el destino del universo",
+    image: "/assets/games/Balancing-Planet/Balancing-Portada.png",
+    description:
+      "Determine exoplanet masses using a planet-sized balance scale. How many Earths does it take?",
   },
 ];
 ---
 
 <BaseLayout>
   <div class="container">
-    {games.map((game) => (
-      <div class="card">
-        <img src={game.image} alt={game.name} class="game-image" />
-        <h2>{game.name}</h2>
-        <p>{game.description}</p>
-      </div>
-    ))}
-  </div>
-</Balancing>
-
-<style>
-  .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .card {
-    background-image: url("/assets/backgrounds/bg-subtle-2-dark-1440w");
-    background-size: cover;
-    background-position: center;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .game-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-
-  .card h2 {
-    margin: 0 0 10px;
-    font-size: 1.2rem;
-    color: #ffffff;
-  }
-
-  .card p {
-    margin: 0 0 15px;
-    font-size: 1rem;
-    color: #cccccc;
-    flex-grow: 1;
-  }
-
-  @media (max-width: 768px) {
-    .container {
-      grid-template-columns: 1fr;
+    {
+      games.map((game, index) => (
+        <div
+          class={`card ${games.length % 2 !== 0 && index === games.length - 1 ? "card-center" : ""}`}
+        >
+          <img src={game.image} alt={game.name} class="game-image" />
+          <h2>{game.name}</h2>
+          <p>{game.description}</p>
+          <button class="open-modal" data-game={JSON.stringify(game)}>
+            Learn More
+          </button>
+        </div>
+      ))
     }
-  }
-</style>
+  </div>
+  <Modal />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const openButtons = document.querySelectorAll(".open-modal");
+      const modal = document.querySelector(".modal") as HTMLElement;
+      const closeButton = document.querySelector(".close-modal") as HTMLElement;
+      const modalContent = document.querySelector(
+        ".modal-content"
+      ) as HTMLElement;
+
+      openButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const gameData = JSON.parse(
+            (button as HTMLElement).dataset.game || "{}"
+          );
+          modalContent.innerHTML = `
+          <h2>${gameData.name}</h2>
+          <p>${gameData.description}</p>
+          <div>
+            ${gameData.demo ? `<video src="${gameData.demo}" alt="${gameData.name}" class="modal-video" controls></video>` : ""}
+          </div>
+        `;
+          modal.style.display = "flex";
+        });
+      });
+
+      closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    });
+  </script>
+
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .modal-button {
+      background-color: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) ;
+    }
+
+    .modal-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-video {
+      width: 100px !important;
+      height: 100px !important;
+    }
+
+    .card {
+      background-image: url("/assets/backgrounds/bg-subtle-2-dark-1440w");
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .card-center {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: calc(50% - 10px);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .game-image {
+      width: 100%;
+      height: 200px;
+      object-fit: fill;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    .card p {
+      margin: 0 0 15px;
+      font-size: 1rem;
+      color: #cccccc;
+      flex-grow: 1;
+    }
+
+    .open-modal {
+      background-color: transparent;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .open-modal:hover {
+      background-color: url("/assets/backgrounds/bg-subtle-2-dark-1440w.jpg");
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .card-center {
+        max-width: 100%;
+      }
+    }
+  </style>
+</BaseLayout>
