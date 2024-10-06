@@ -40,6 +40,11 @@ const games: Game[] = [
 ---
 
 <BaseLayout>
+  <section>
+    <h1 style="text-align: center;" class="degrade">Discovering Exoplanets </h1>
+    <p style="text-align: center;" style="color: white;">These science based games adapt the different steps of the study of exoplanets. <br>
+       Learn how astronomers discover and gather data about these distant worlds.</p>
+  </section>
   <div class="container">
     {
       games.map((game, index) => (
@@ -146,6 +151,12 @@ const games: Game[] = [
       justify-self: center;
       max-width: calc(50% - 10px);
     }
+
+    .degrade {
+    background-image: linear-gradient(90deg, #f4f4f4 3%, #5492be 62%, #366787 69%, #184d73 97%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
     .card:hover {
       transform: translateY(-5px);
