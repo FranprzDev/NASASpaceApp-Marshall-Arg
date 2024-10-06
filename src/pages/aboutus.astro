@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Person {
+  name: string;
+  linkedin: string;
+  image: string;
+}
+
+const people: Person[] = [
+  {
+    name: "Francisco Perez",
+    linkedin: "https://www.linkedin.com/in/franprzdev/",
+    image: "/assets/team/fran.png"
+  },
+  {
+    name: "Manuel Parada",
+    linkedin: "https://www.linkedin.com/in/manuel-parada-70a4b4328/",
+    image: "/assets/team/Parada.png"
+  },
+  {
+    name: "Thiago Kuperman",
+    linkedin: "https://www.linkedin.com/in/thiago-kuperman/",
+    image: "/assets/team/Thiago.png"
+  },
+  {
+    name: "Marilena Servin",
+    linkedin: "https://www.linkedin.com/in/marilena-servin-305440207/",
+    image: "/assets/team/Marilena.png"
+  },
+  {
+    name: "Paloma Rieznik",
+    linkedin: "https://www.linkedin.com/in/palomarieznik/",
+    image: "/assets/team/Palo.png"
+  }
+];
+---
+
+<BaseLayout>
+  <div class="container">
+    {people.map((person) => (
+      <div class="card">
+        <img src={person.image} alt={person.name} class="person-image" />
+        <h2>{person.name}</h2>
+        <a href={person.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-image: url("/assets/backgrounds/bg-subtle-2-dark-1440w");
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .person-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    display: block;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .card h2 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .card p {
+    margin: 0 0 15px;
+    font-size: 1rem;
+    color: #cccccc;
+    text-align: center;
+  }
+
+  .card a {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    padding: 8px 16px;
+    background-color: rgba(0, 119, 181, 0.8);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+
+  .card a:hover {
+    background-color: rgba(0, 95, 142, 0.9);
+  }
+
+  @media (max-width: 1000px) {
+    .card {
+      width: calc(50% - 20px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .card {
+      width: 100%;
+    }
+  }
+</style>
