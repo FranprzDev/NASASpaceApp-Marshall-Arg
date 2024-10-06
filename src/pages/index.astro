@@ -4,14 +4,8 @@ import { getCollection } from "astro:content";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Component Imports
-import CallToAction from "../components/CallToAction.astro";
-import Hero from "../components/Hero.astro";
-
 // Page section components
 import Game from "../components/Game.astro";
-import MainModel from "../components/indexmodel/MainModel";
-import TextModel from "../components/indexText/TextModel";
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
@@ -25,34 +19,8 @@ const projects = (await getCollection("work"))
 <BaseLayout>
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
-      <header class="hero">
-        <Hero subtitle="We are a great team">
-          <div class="modelText">
-            <TextModel client:load />
-          </div>
-        </Hero>
-
-        <div class="model">
-          <MainModel client:load />
-        </div>
-      </header>
-
       <Game />
     </div>
-
-    <!-- <main class="wrapper stack gap-20 lg:gap-48">
-      <section class="section with-background with-cta">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>About Us</h3>
-          <p>
-            We are the team of people who make awesome things happen.
-          </p>
-
-          <CallToAction href="/about" set:text={"More about we"}/>
-
-
-        </header>
-    </main> -->
   </div>
 </BaseLayout>
 

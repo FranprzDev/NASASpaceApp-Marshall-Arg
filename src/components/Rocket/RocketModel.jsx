@@ -1,17 +1,18 @@
 import { Canvas } from '@react-three/fiber';
-import MainExperience from './MainExperience';
+import RocketExperience from './RocketExperience';
 
-export default function MainModel() {
+export default function RocketModel() {
   return (
     <Canvas 
       camera={{
         fov: 75,
         near: 0.1,
         far: 100,
-        position: [0, -1, 5] 
+        position: [0, 0.1, 0.5] 
       }}
+     
     >
-      <MainExperience />
+      <RocketExperience />
     </Canvas>
   );
 }

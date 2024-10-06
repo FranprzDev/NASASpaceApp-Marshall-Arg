@@ -1,152 +1,16 @@
 ---
-import Icon from './Icon.astro';
-import type { iconPaths } from './IconPaths';
-import LaptopModel from './Laptop/LaptopModel.jsx'
-
-const textLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-  { label: 'Home', href: '/', icon: 'house' },
-  { label: 'Work', href: '/work/', icon: 'briefcase' },
-  { label: 'About', href: '/about/', icon: 'user' },
-];
-
-const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-  { label: 'Nasa', href: 'https://science.nasa.gov', icon: 'nasa'}
-];
-
-
-const iconSize = '2.5em';
+import RocketModel from './Rocket/RocketModel.jsx'
 ---
 <nav>
   <div class="menu-header">
     <a href="/" class="site-title">
       <div class="laptopModel">
-        <LaptopModel client:load />
+        <RocketModel client:load />
       </div>
       Exo Games
     </a>
-    <menu-button>
-      <template>
-        <button class="menu-button" aria-expanded="false">
-          <span class="sr-only">Menu</span>
-          <Icon icon="list" />
-        </button>
-      </template>
-    </menu-button>
-  </div>
-  <noscript>
-    <ul class="nav-items">
-      {
-        textLinks.map(({ label, href, icon }) => (
-          <li class="menu-option">
-            <a
-              href={href}
-              aria-current={Astro.url.pathname === href}
-              class:list={[
-                'menu-link',
-                {
-                  active:
-                    Astro.url.pathname === href ||
-                    (href !== '/' && Astro.url.pathname.startsWith(href)),
-                },
-              ]}
-            >
-              <Icon icon={icon} class="menu-icon" size={iconSize} />
-              <span class="menu-overlay">{label}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </noscript>
-  <noscript>
-    <div class="menu-footer">
-      <div class="socials">
-        {
-          iconLinks.map(({ href, icon, label }) => (
-            <a href={href} class="social">
-              <span class="sr-only">{label}</span>
-              <Icon icon={icon} />
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </noscript>
-  <div id="menu-content" hidden>
-    <ul class="nav-items">
-      {
-        textLinks.map(({ label, href, icon }) => (
-          <li class="menu-option">
-            <a
-              href={href}
-              aria-current={Astro.url.pathname === href}
-              class:list={[
-                'menu-link',
-                {
-                  active:
-                    Astro.url.pathname === href ||
-                    (href !== '/' && Astro.url.pathname.startsWith(href)),
-                },
-              ]}
-            >
-              <Icon icon={icon} class="menu-icon" size={iconSize} />
-              <span class="menu-overlay">{label}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="menu-footer">
-      <div class="socials">
-        {
-          iconLinks.map(({ href, icon, label }) => (
-            <a href={href} class="social">
-              <span class="sr-only">{label}</span>
-              <Icon icon={icon} />
-            </a>
-          ))
-        }
-      </div>
-    </div>
   </div>
 </nav>
-
-<script>
-  class MenuButton extends HTMLElement {
-    constructor() {
-      super();
-
-      // Inject menu toggle button when JS runs.
-      this.appendChild(this.querySelector('template')!.content.cloneNode(true));
-      const btn = this.querySelector('button')!;
-
-      // Hide menu (shown by default to support no-JS browsers).
-      const menu = document.getElementById('menu-content')!;
-      menu.hidden = true;
-      // Add "menu-content" class in JS to avoid covering content in non-JS browsers.
-      menu.classList.add('menu-content');
-
-      /** Set whether the menu is currently expanded or collapsed. */
-      const setExpanded = (expand) => {
-        btn.setAttribute('aria-expanded', expand ? 'true' : 'false');
-        menu.hidden = !expand;
-      };
-
-      // Toggle menu visibility when the menu button is clicked.
-      btn.addEventListener('click', () => setExpanded(menu.hidden));
-
-      // Hide menu button for large screens.
-      const handleViewports = (e) => {
-        setExpanded(e.matches);
-        btn.hidden = e.matches;
-      };
-      const mediaQueries = window.matchMedia('(min-width: 50em)');
-      handleViewports(mediaQueries);
-      mediaQueries.addEventListener('change', handleViewports);
-    }
-  }
-  customElements.define('menu-button', MenuButton);
-</script>
 
 <style>
   nav {
@@ -154,7 +18,6 @@ const iconSize = '2.5em';
     position: relative;
     font-family: var(--font-brand);
     font-weight: 500;
-    margin-bottom: 3.5rem;
   }
 
   .laptopModel{

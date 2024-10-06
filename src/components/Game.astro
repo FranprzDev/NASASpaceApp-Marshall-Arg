@@ -1,25 +1,54 @@
----
-import PawPatrolModel from "./pawpatrolmodel/PawPatrolModel";
----
-
 <section class="box skills">
   <div class="stack gap-2 lg:gap-4 redirect">
     <h2>Exploring Exo Planets</h2>
-    <div class="">
-      <PawPatrolModel name="rocky" client:load />
-    </div>
+    <img src="./public/assets/rocket.png" alt="rocket" class="responsiveimg" />
     <p>Explore Exo Planets with Rocky</p>
   </div>
   <div class="stack gap-2 lg:gap-4 redirect">
     <h2>Discovering Exo Planets</h2>
-    <div class="">
-      <PawPatrolModel name="everest" client:load />
-    </div>
+    <img
+      src="./public/assets/telescope.png"
+      alt="telescope"
+      class="responsiveimg"
+    />
     <p>Discover with Everest</p>
   </div>
 </section>
 
 <style>
+  .redirect {
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    padding: 10px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+  }
+  .responsiveimg {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+  .iconCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aqua;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+  }
   .box {
     border: 1px solid var(--gray-800);
     border-radius: 0.75rem;
@@ -27,24 +56,26 @@ import PawPatrolModel from "./pawpatrolmodel/PawPatrolModel";
     background-color: var(--gray-999_40);
     box-shadow: var(--shadow-sm);
     perspective: 1000px;
+    height: auto;
+    width: 100%;
   }
 
-  .redirect {
-    cursor: pointer;
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
   .superIcon {
     height: 60px;
     width: 60px;
   }
 
+  .model {
+    height: 100%;
+    width: 100%;
+  }
+
   .skills {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   @media (min-width: 50em) {
@@ -55,18 +86,35 @@ import PawPatrolModel from "./pawpatrolmodel/PawPatrolModel";
 
     .skills {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-content: center;
+      width: 100%;
     }
 
     .skills h2 {
       font-size: var(--text-2xl);
     }
+
+    .redirect {
+      max-width: 100%;
+    }
   }
 
   @media (max-width: 50em) {
+    .skills {
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
     .skills h2 {
       font-size: var(--text-xl);
+    }
+
+    .redirect {
+      height: auto;
+      width: 100%;
     }
   }
 </style>

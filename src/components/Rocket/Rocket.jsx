@@ -3,8 +3,8 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { AnimationMixer } from 'three';
 
-export default function Laptop() {
-  const { scene, animations } = useGLTF('../models/laptop.glb');
+export default function Rocket() {
+  const { scene, animations } = useGLTF('../models/toy_rocket.glb');
   const { viewport } = useThree(); 
   const mixer = useRef(null);
   const modelRef = useRef(scene);
@@ -30,7 +30,7 @@ export default function Laptop() {
   return (
     <>
       <group scale={responsiveScale}>  
-        <primitive position={[0, 0, 0]} ref={modelRef} object={scene} />
+        <primitive position={[0, 1.5, 0]} scale={0.40} ref={modelRef} object={scene} />
       </group>
     </>
   );
